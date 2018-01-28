@@ -1,0 +1,10 @@
+.git
+.mypy_cache
+.vscode
+tests
+.flake8
+.gitignore
+runtests.sh
+**/*.py[cod]
+__pycache__
+api.paw

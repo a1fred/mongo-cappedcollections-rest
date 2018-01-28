@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  mongodb:
+    restart: always
+    image: mongo:3.7
+    volumes:
+      - /data/db
+    ports:
+      - "27017:27017"
+  mongorest:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb
+    environment:
+      MONGODB_CONNECTION_STRING: mongodb://mongodb:27017
+    ports:
+      - "127.0.0.1:5000:5000"
