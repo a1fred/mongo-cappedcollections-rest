@@ -1,10 +1,13 @@
-FROM python:3.6
+FROM alpine:3.7
+LABEL maintainer="demalf@gmail.com"
 
-RUN pip install uwsgi
+ENV MONGODB_CONNECTION_STRING mongodb://localhost:27017
+ENV MONGODB_DB_NAME mongorest
+EXPOSE 5000
 
-WORKDIR /collector
-ADD ./collector /collector
+RUN apk add --update --no-cache uwsgi-python3 gcc python3-dev musl-dev linux-headers make
+WORKDIR /app
+ADD ./ /app
+RUN pip3 install -r requirements.txt
 
-RUN pip install -r requirements.txt
-
-CMD [ "python3", "webui.py" ]
+CMD [ "python3", "main.py" ]

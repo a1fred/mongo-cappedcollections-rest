@@ -13,7 +13,7 @@ enviroement variables:
 
 Run container
 ```shell
-docker run -e MONGODB_CONNECTION_STRING=mongodb://localhost:1234 -e MONGODB_DB_NAME=mongorest a1fred/mongorest
+docker run -e "MONGODB_CONNECTION_STRING=mongodb://localhost:27017" -e "MONGODB_DB_NAME=mongorest" -p 5000 a1fred/mongorest
 ```
 
 ```yml
@@ -29,7 +29,7 @@ docker run -e MONGODB_CONNECTION_STRING=mongodb://localhost:1234 -e MONGODB_DB_N
             - "27017:27017"
         mongorest:
             restart: always
-            image: a1fred/mongorest
+            image: a1fred/mongo-cappedcollections-rest
             depends_on:
             - mongodb
             environment:
